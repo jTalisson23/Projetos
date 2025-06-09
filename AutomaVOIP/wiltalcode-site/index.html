@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WilTalCode - Soluções Tech</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a2e0e9f66f.js" crossorigin="anonymous"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-sans">
+
+  <!-- Navbar Fixa -->
+ <header class="fixed top-0 left-0 right-0 z-50 bg-black border-b border-orange-500 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#home" class="flex items-center">
+      <img 
+        src="imagens/banner.png" 
+        alt="Logo WilTalCode" 
+        class="h-14 w-auto max-w-[160px] brightness-[1.8] contrast-[1.4] saturate-150 drop-shadow-md"
+      />
+    </a>
+      
+      <nav class="space-x-6 text-sm">
+      <a href="#home" class="hover:text-orange-400">Home</a>
+      <a href="#servicos" class="hover:text-orange-400">Serviços</a>
+      <a href="#depoimentos" class="hover:text-orange-400">Depoimentos</a>
+      <a href="#acessos" class="hover:text-orange-400">Acessos</a>
+      <a href="#contato" class="hover:text-orange-400">Contato</a>
+    </nav>
+  </div>
+  </header>
+
+  <main class="pt-24">
+    <!-- Seção Home com CTA -->
+    <section id="home" class="min-h-screen flex items-center justify-center bg-black text-center px-4">
+      <div>
+        <h2 class="text-5xl font-bold text-orange-500 mb-4">Bem-vindo à WilTalCode</h2>
+        <p class="text-gray-300 mb-6">Soluções inteligentes em tecnologia e inovação</p>
+        <a href="#contato" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition">Fale conosco</a>
+      </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos" class="py-20 bg-gray-900">
+      <div class="max-w-6xl mx-auto px-4">
+        <h3 class="text-3xl font-bold text-orange-500 text-center mb-12">Serviços</h3>
+        <div class="grid md:grid-cols-4 gap-8 text-center">
+          <div>
+            <i class="fas fa-shield-alt text-orange-500 text-3xl mb-2"></i>
+            <h4 class="font-bold text-white mb-1">Cibersegurança</h4>
+            <p class="text-gray-400 text-sm">Proteção de sistemas e dados com soluções modernas e eficazes.</p>
+          </div>
+          <div>
+            <i class="fas fa-network-wired text-orange-500 text-3xl mb-2"></i>
+            <h4 class="font-bold text-white mb-1">Infraestrutura</h4>
+            <p class="text-gray-400 text-sm">Planejamento de redes e estruturação de ambientes corporativos.</p>
+          </div>
+          <div>
+            <i class="fas fa-chart-line text-orange-500 text-3xl mb-2"></i>
+            <h4 class="font-bold text-white mb-1">Análise de Dados</h4>
+            <p class="text-gray-400 text-sm">Transforme dados em decisões com BI, dashboards e relatórios.</p>
+          </div>
+          <div>
+            <i class="fas fa-code text-orange-500 text-3xl mb-2"></i>
+            <h4 class="font-bold text-white mb-1">Desenvolvimento</h4>
+            <p class="text-gray-400 text-sm">Sistemas web sob demanda, sites modernos e soluções para pequenas empresas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Depoimentos com Imagens Pessoais -->
+    <section id="depoimentos" class="py-20 bg-black">
+      <h3 class="text-3xl font-bold text-orange-500 text-center mb-12">Depoimentos</h3>
+      <div class="relative max-w-xl mx-auto overflow-hidden">
+        <div class="carousel flex transition-transform duration-700">
+          <div class="min-w-full text-center">
+            <img src="imagens/william.jpg" alt="William" class="mx-auto rounded-full mb-4 w-24 h-24 object-cover" />
+            <p class="text-gray-300 italic">“Nosso projeto é guiado por paixão e tecnologia.”</p>
+          </div>
+          <div class="min-w-full text-center">
+            <img src="imagens/talisson.jpg" alt="Talisson" class="mx-auto rounded-full mb-4 w-24 h-24 object-cover" />
+            <p class="text-gray-300 italic">“Transformar ideias em soluções é o que nos move.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Acessos -->
+   <section id="acessos" class="py-20 bg-gray-900 text-center">
+  <h3 class="text-3xl font-bold text-orange-500 mb-4">Acessos</h3>
+  <p class="text-gray-400 mb-6">Área do cliente - insira seus dados para continuar.</p>
+
+  <form action="dashboard.html" method="POST" class="max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div class="mb-4 text-left">
+      <label for="login" class="block text-sm font-medium text-gray-300 mb-1">Login</label>
+      <input type="text" id="login" name="login" required class="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-orange-500" />
+    </div>
+    <div class="mb-6 text-left">
+      <label for="senha" class="block text-sm font-medium text-gray-300 mb-1">Senha</label>
+      <input type="password" id="senha" name="senha" required class="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-orange-500" />
+    </div>
+    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded transition">
+      Entrar
+    </button>
+  </form>
+</section>
+
+    <!-- Contato -->
+    <section id="contato" class="py-20 bg-black text-center">
+      <h3 class="text-3xl font-bold text-orange-500 mb-4">Contato</h3>
+      <p class="text-gray-400">Entre em contato conosco por e-mail.</p>
+      <div class="mt-4 text-sm">
+        <p class="text-gray-300">E-mail: <a href="mailto:contato@wiltalcode.com.br" class="text-green-400 hover:underline">contato@wiltalcode.com.br</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="bg-gray-900 py-6 text-center text-sm text-gray-400">
+    <p>&copy; 2025 WilTalCode. Todos os direitos reservados.</p>
+    <div class="mt-2">
+      <a href="#" class="hover:text-orange-400 mx-2">Privacidade</a>
+      <a href="#" class="hover:text-orange-400 mx-2">Termos</a>
+    </div>
+  </footer>
+
+  <!-- Botão WhatsApp Flutuante -->
+  <a href="https://wa.me/5500000000000" target="_blank" class="fixed bottom-5 right-5 bg-green-500 p-3 rounded-full shadow-lg hover:scale-110 transition">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="w-6 h-6" alt="WhatsApp" />
+  </a>
+
+  <!-- Script do Carrossel -->
+  <script>
+    const carousel = document.querySelector('.carousel');
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % 2; // quantidade de depoimentos
+      carousel.style.transform = `translateX(-${index * 100}%)`;
+    }, 4000);
+  </script>
+</body>
+</html>

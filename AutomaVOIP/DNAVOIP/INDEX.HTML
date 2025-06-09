@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ramais DNA - Laboratório</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#0d47a1',
+            secondary: '#1565c0',
+            important: '#d32f2f',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans p-6">
+
+  <div class="flex justify-center mb-4">
+    <img src="logo.png" alt="Logomarca DNA" class="h-16">
+  </div>
+
+  <h1 class="text-3xl font-bold text-primary text-center mb-8">Lista de Ramais - DNA Laboratório</h1>
+
+  <div class="max-w-5xl mx-auto">
+    <div class="sticky top-0 bg-gray-100 py-3 z-10">
+      <input type="text" id="searchInput" placeholder="Buscar por nome, setor ou ramal..."
+        class="w-full p-3 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+    </div>
+
+    <div id="ramaisContainer" class="space-y-6 mt-6"></div>
+  </div>
+
+  <footer class="text-center text-sm text-gray-500 mt-10">
+    © 2025 DNA Laboratório. Todos os direitos reservados.
+  </footer>
+
+  <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' });"
+    class="fixed bottom-5 right-5 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-blue-800">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    const setores = [
+        {
+    "setor": "Almoxarifado",
+    "ramais": [
+      { "numero": "7303", "nome": "Yuri/Wesley" },
+      { "numero": "7358", "nome": "Yuri/Wesley" }
+    ]
+  },
+  {
+    "setor": "ARACAJU",
+    "ramais": [
+      { "numero": "20", "nome": "Call Center" },
+      { "numero": "21", "nome": "Call Center" },
+      { "numero": "22", "nome": "Aracaju I" },
+      { "numero": "23", "nome": "ADM/Faturamento (Julio)" },
+      { "numero": "24", "nome": "Consultório 01 (Dr Emerson)" },
+      { "numero": "25", "nome": "Consultório 02 (Dra Julia/Elaine)" },
+      { "numero": "26", "nome": "Gerência (Luciana)" },
+      { "numero": "28", "nome": "Recepção (Marcela)" },
+      { "numero": "29", "nome": "Recepção (Geise)" },
+      { "numero": "30", "nome": "Recepção (Wilna)" },
+      { "numero": "31", "nome": "Área Técnica" }
+    ]
+  },
+  {
+    "setor": "Biologia Molecular",
+    "ramais": [
+      { "numero": "7119", "nome": "Coordenação Paula/Layla" },
+      { "numero": "7103", "nome": "Assessoria médica-científica" },
+      { "numero": "7154", "nome": "Biologia Molecular (Rastreio)" }
+    ]
+  },
+  {
+    "setor": "CDA",
+    "ramais": [
+      { "numero": "7112", "nome": "Núbia" },
+      { "numero": "7153", "nome": "Bancada" }
+    ]
+  },
+  {
+    "setor": "CDA COVID",
+    "ramais": [
+      { "numero": "7162", "nome": "-" }
+    ]
+  },
+  {
+    "setor": "Coleta",
+    "ramais": [
+      { "numero": "SN", "nome": "-" },
+      { "numero": "7110", "nome": "Ivana" }
+    ]
+  },
+  {
+    "setor": "Compras",
+    "ramais": [
+      { "numero": "7127", "nome": "Emerson" }
+    ]
+  },
+  {
+    "setor": "Coordenação de suprimentos",
+    "ramais": [
+      { "numero": "7143", "nome": "Michella" }
+    ]
+  },
+  {
+    "setor": "Financeiro",
+    "ramais": [
+      { "numero": "7137", "nome": "Rebeca" },
+      
+    ]
+  },
+  {
+    "setor": "Gerência Operacional",
+    "ramais": [
+      { "numero": "7106", "nome": "Marcela" }
+    ]
+  },
+  {
+    "setor": "Parceiros",
+    "ramais": [
+      { "numero": "7147", "nome": "Fernanda" },
+      { "numero": "7129", "nome": "Luciene" },
+    ]
+  },
+
+
+  {
+    "setor": "PITUBA - Amazonas / Telefonia",
+    "ramais": [
+      { "numero": "7422", "nome": "Edna" },
+      { "numero": "7404", "nome": "Consultório Médico 01" },
+      { "numero": "7405", "nome": "Consultório Médico 02" },
+      { "numero": "7516", "nome": "Vacinas" },
+      { "numero": "7540", "nome": "Cassiana (Qualidade)" },
+      { "numero": "7541", "nome": "Isabele (Qualidade)" },
+      { "numero": "1071", "nome": "Coordenação (Coleta Domiciliar)" },
+      { "numero": "1043", "nome": "Coleta Domiciliar" },
+      { "numero": "1037", "nome": "Coleta Domiciliar" },
+      { "numero": "1072", "nome": "Carine Siqueira" },
+      { "numero": "SAC 1", "nome": "Ingenium" },
+      { "numero": "SAC 2", "nome": "Ingenium" },
+      { "numero": "SAC 3", "nome": "Ingenium" },
+      { "numero": "SAC 4", "nome": "Ingenium" },
+      { "numero": "SAC 5", "nome": "Ingenium" },
+      { "numero": "SAC 6", "nome": "Ingenium" },
+      { "numero": "SAC 7", "nome": "Ingenium" },
+      { "numero": "SAC 8", "nome": "Ingenium" },
+      { "numero": "SAC 9", "nome": "Ingenium" },
+      { "numero": "SAC 10", "nome": "Ingenium" },
+      { "numero": "SAC 11", "nome": "Ingenium" },
+      { "numero": "SAC 12", "nome": "Ingenium" },
+      { "numero": "SAC 13", "nome": "Ingenium" },
+      { "numero": "SAC 14", "nome": "Ingenium" }
+    ]
+  },
+  {
+    "setor": "PITUBA - Consultórios e Técnicos",
+    "ramais": [
+      { "numero": "7407", "nome": "Assessoria médica" },
+      { "numero": "7419", "nome": "Bioquímica" },
+      { "numero": "7418", "nome": "Hematologia" },
+      { "numero": "7421", "nome": "Hormônio / Bancada" },
+      { "numero": "7424", "nome": "Uroanálise" },
+      { "numero": "7425", "nome": "Clinin" },
+      { "numero": "7426", "nome": "Clinin" },
+      { "numero": "7420", "nome": "Gerência / Área Técnica (Isabel)" },
+      { "numero": "7411", "nome": "Microbiologia" },
+      { "numero": "7402", "nome": "Portaria" },
+      { "numero": "7400", "nome": "Recepção" },
+      { "numero": "7401", "nome": "Recepção" },
+      { "numero": "7412", "nome": "CDA" },
+      { "numero": "7409", "nome": "Triagem/Pezinho (Lorena)" },
+      { "numero": "7410", "nome": "Patologia 2" },
+      { "numero": "7550", "nome": "Patologia - Coordenação" }
+    ]
+  },
+   {
+    "setor": "Rede Cegonha",
+    "ramais": [
+      { "numero": "7113", "nome": "Marco" },
+      { "numero": "7101", "nome": "Elisa" },
+      ]
+  },
+  {
+    "setor": "RH",
+    "ramais": [
+      { "numero": "7145", "nome": "(Supervisão) Fernanda" },
+      { "numero": "7120", "nome": "(R&S) " },
+      { "numero": "7134", "nome": "(DP) " },
+      { "numero": "SN", "nome": "Carla" }
+    ]
+  },
+  {
+    "setor": "Secretária",
+    "ramais": [
+      { "numero": "7121", "nome": "Graziela" }
+    ]
+  },
+  {
+    "setor": "TI",
+    "ramais": [
+      { "numero": "7115", "nome": "Jardel" },
+      { "numero": "7116", "nome": "Rafael" },
+      { "numero": "7117", "nome": "Talisson" },
+      { "numero": "7144", "nome": "Emerson" },
+      { "numero": "7114", "nome": "Danillo" }
+    ]
+  }
+    ];
+
+    const container = document.getElementById("ramaisContainer");
+
+    function renderRamais(data) {
+      container.innerHTML = "";
+      data.forEach(setor => {
+        const card = document.createElement("div");
+        card.className = "bg-white border-l-4 border-primary p-5 rounded-lg shadow";
+
+        const title = document.createElement("h2");
+        title.className = "text-xl font-bold text-primary mb-3";
+        title.textContent = setor.setor;
+        card.appendChild(title);
+
+        setor.ramais.forEach(r => {
+          const linha = document.createElement("div");
+          linha.className = "flex items-center text-sm text-gray-700 mb-2";
+          linha.innerHTML = r.numero.includes("SAC") || r.numero === "SN"
+            ? `<i class=\"fas fa-phone-alt text-secondary mr-2\"></i><span>${r.numero} - ${r.nome}</span>`
+            : `<i class=\"fas fa-phone-alt text-secondary mr-2\"></i><a href=\"sip:${r.numero}@192.168.200.236\" class=\"font-medium hover:underline\">${r.numero} - ${r.nome}</a>`;
+          card.appendChild(linha);
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const query = this.value.toLowerCase();
+      const filtrado = setores.map(setor => ({
+        setor: setor.setor,
+        ramais: setor.ramais.filter(r =>
+          r.nome.toLowerCase().includes(query) ||
+          r.numero.toLowerCase().includes(query) ||
+          setor.setor.toLowerCase().includes(query)
+        )
+      })).filter(s => s.ramais.length > 0);
+      renderRamais(filtrado);
+    });
+
+    renderRamais(setores);
+  </script>
+</body>
+</html>
