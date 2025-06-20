@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Central de Ajuda - DNA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Header -->
+   
+ <div class="bg-[#007bff] py-10 text-center text-white">
+  <img src="marca_DNA_com box-28.png" alt="Logo DNA" class="h-20 mx-auto mb-4">
+  
+  <h1 class="text-2xl font-bold">Olá, como podemos ajudar você?</h1>
+
+  <div class="mt-4">
+    <input id="buscaDashboard" type="text" placeholder="Busque por ramal, nome ou setor..." 
+           class="px-4 py-2 w-2/3 max-w-lg rounded shadow focus:outline-none text-gray-800" />
+  </div>
+</div>
+
+  <!-- Ações -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 py-10 text-center">
+    <a href="#" class="hover:shadow-lg transition-all p-5 rounded border border-gray-200">
+      <i class="fas fa-book text-blue-600 text-3xl mb-2"></i>
+      <p class="font-semibold">Base de conhecimento</p>
+    </a>
+    <a href="index.html" class="hover:shadow-lg transition-all p-5 rounded border border-gray-200">
+      <i class="fas fa-phone text-blue-600 text-3xl mb-2"></i>
+      <p class="font-semibold">Ramais</p>
+    </a>
+    <a href="mailto:suporte@dnagenetica.com.br" class="hover:shadow-lg transition-all p-5 rounded border border-gray-200">
+      <i class="fas fa-envelope text-blue-600 text-3xl mb-2"></i>
+      <p class="font-semibold">E-mail</p>
+    </a>
+    <a href="sites.html" class="hover:shadow-lg transition-all p-5 rounded border border-gray-200">
+  <i class="fas fa-globe text-blue-600 text-3xl mb-2"></i>
+  <p class="font-semibold">Links DNA</p>
+</a>
+
+    </a>
+  </div>
+
+  <!-- Resultados da busca -->
+  <div id="resultadoBusca" class="max-w-4xl mx-auto px-6 pb-10"></div>
+
+  <footer class="text-center text-sm text-gray-500 mt-10 mb-5">
+    © 2025 DNA Laboratório. Todos os direitos reservados.
+  </footer>
+
+  <!-- Dados dos ramais -->
+  <script src="ramais-data.js"></script>
+
+  <!-- Script de busca -->
+  <script>
+  const inputBusca = document.getElementById("buscaDashboard");
+  const container = document.getElementById("resultadoBusca");
+
+  function renderResultado(lista) {
+    container.innerHTML = "";
+    if (lista.length === 0) return;
+
+    lista.forEach(setor => {
+      const card = document.createElement("div");
+      card.className = "bg-white border-l-4 border-blue-700 p-4 my-4 rounded shadow";
+
+      const title = document.createElement("h2");
+      title.className = "text-lg font-semibold text-blue-800 mb-2";
+      title.textContent = setor.setor;
+      card.appendChild(title);
+
+      setor.ramais.forEach(ramal => {
+        const linha = document.createElement("p");
+        linha.className = "text-sm text-gray-700 break-words";
+        linha.textContent = `${ramal.numero} - ${ramal.nome}`;
+        card.appendChild(linha);
+      });
+
+      container.appendChild(card);
+    });
+  }
+
+  inputBusca.addEventListener("input", function () {
+    const termo = this.value.trim().toLowerCase();
+
+    // Se o campo estiver vazio, limpa resultados
+    if (termo === "") {
+      container.innerHTML = "";
+      return;
+    }
+
+    // Aplica filtro somente se houver correspondência nos ramais
+    const resultados = setores
+      .map(setor => {
+        const ramaisFiltrados = setor.ramais.filter(r =>
+          r.nome.toLowerCase().includes(termo) ||
+          r.numero.toLowerCase().includes(termo) ||
+          setor.setor.toLowerCase().includes(termo)
+        );
+        return ramaisFiltrados.length > 0
+          ? { setor: setor.setor, ramais: ramaisFiltrados }
+          : null;
+      })
+      .filter(Boolean);
+
+    // Exibe "nenhum resultado" se nada for encontrado
+    if (resultados.length === 0) {
+      container.innerHTML = "<p class='text-gray-500 mt-6 text-center'>Nenhum resultado encontrado.</p>";
+      return;
+    }
+
+    renderResultado(resultados);
+  });
+</script>
+
+</body>
+</html>
